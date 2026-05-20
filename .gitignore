@@ -3,6 +3,10 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# FIP-Analyzer build artifacts
+fip_comparison_output/
+.fip_cache/
+
 # C extensions
 *.so
 

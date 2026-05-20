@@ -1,0 +1,52 @@
+name: Build and deploy FIP comparison
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build FIP comparison
+        run: |
+          python fip_compare.py \
+            RA0nlMrlMJFm_NqQvPuES73-0rNa8A35VXlHWLMtWrRuY.trig \
+            RAiEW_g7wsXXMJINFJ3Qx7h2avPu1rx4yp1SE7Mw8jFkU.trig \
+            RAQXwdUrfZ40k2MdeDv9fokzyh35UKuN3w17G2yO4Wm8A.trig
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: fip_comparison_output
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
