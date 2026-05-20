@@ -1,0 +1,45 @@
+@prefix this: <https://w3id.org/np/RAiEW_g7wsXXMJINFJ3Qx7h2avPu1rx4yp1SE7Mw8jFkU> .
+@prefix sub: <https://w3id.org/np/RAiEW_g7wsXXMJINFJ3Qx7h2avPu1rx4yp1SE7Mw8jFkU/> .
+@prefix schema: <https://schema.org/> .
+@prefix np: <http://www.nanopub.org/nschema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix npx: <http://purl.org/nanopub/x/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix orcid: <https://orcid.org/> .
+@prefix fip: <https://w3id.org/fair/fip/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+sub:Head {
+  this: a np:Nanopublication;
+    np:hasAssertion sub:assertion;
+    np:hasProvenance sub:provenance;
+    np:hasPublicationInfo sub:pubinfo .
+}
+
+sub:assertion {
+  sub:fip a fip:FAIR-Implementation-Profile;
+    dct:description "FIESTA Bio FIP: FIP for the Bioimaging community for the FIESTA OSCARS ";
+    rdfs:label "FIESTA Bio FIP";
+    schema:version "1.0.0";
+    fip:declared-by <https://w3id.org/np/RAjmALSYfmSr04t6hTEkrJwzL0NwLGxdPrWfel_7RzRV0#Galaxy-Imaging>;
+    fip:has-declaration-index <https://w3id.org/np/RAmcsRu2MUOmFrwixJpD60xCw_-h0pLTjzeczyWqogmQM> .
+}
+
+sub:provenance {
+  sub:assertion dct:creator orcid:0000-0002-5862-6132, orcid:0000-0002-8799-4671 .
+}
+
+sub:pubinfo {
+  this: dct:created "2025-08-29T14:58:19Z"^^xsd:dateTime;
+    dct:creator <https://fip.fair-wizard.com/wizard>;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/>;
+    npx:introduces sub:fip;
+    prov:wasDerivedFrom <https://w3id.org/fip/wizard/8ccc278d-d6a7-402e-9e14-e75cf2538caa> .
+  
+  sub:sig npx:hasAlgorithm "RSA";
+    npx:hasPublicKey "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCoKFb7LKlXyBB7BUvjFF9bDJNk0WxH3Xerr4H3v/VCiRVshEDl3BZVekbMMmdRe+TOPyc8AOLd9IAL2VfVVD/T0rmCHk7Pw7DQjI96mwyeXhE7f4g0WG5UT5Pxxm0Rzy7IrYnEaaVDs7dkZUt952M6qWlHfTwCQDcXJhZfLiXoMwIDAQAB";
+    npx:hasSignature "UzdHeHkIPE0LXkzl69ii2ywsRfJsgzD1o1exP/zog0FZAub6CHSUAEyj20pyfkLzNd5H6Fg7F06qITqjZqCAueRqyj49RswquT/LyLLCwojAXWwq3/xkY6kqWW6rUe4F87jldJIuZVim7TdhMNiRY4/EX+v7k/C2MPRCJJZSixY=";
+    npx:hasSignatureTarget this: .
+}
+
